@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="shortcut icon" href="img/icon.gif"/>
+        <title>INICIO</title>
+        <script type="text/javascript"> 
+            function leerGET(){ 
+                var cadGET = location.search.substr(1,location.search.length);                
+                document.getElementById('IdEndSession').style.display ='none';
+                document.getElementById('IdCloseSession').style.display ='none';
+                document.getElementById('IdNoSession').style.display ='none';                
+                if(cadGET.indexOf("timeout") !== -1){
+                    document.getElementById('IdEndSession').style.display ='block';
+                }
+                if(cadGET.indexOf("close") !== -1){
+                    document.getElementById('IdCloseSession').style.display ='block';
+                }
+                if(cadGET.indexOf("nosession") !== -1){
+                    document.getElementById('IdNoSession').style.display ='block';
+                }
+            } 
+        </script>
+        
+    </h:head>
+    <h:body style="font-size: 10px;" onload="leerGET()">    
+
+        <h:form id="IdForm1">    
+            <div style=" 
+                 position:absolute;
+                 width: 500px; 
+                 height: 380px; 
+                 left: 50%; 
+                 margin-left: -250px;  
+                 top: 50%;
+                 margin-top: -190px;">
+                <p:growl id="message1"  showDetail="true" sticky="true" />
+                #{applicationControlMB.reset()}                
+                <h:graphicImage id="IdImgCarga1" value="img/ajaxloading.gif"  style="display: none" />                
+                <p:graphicImage value="img/img_login.png" />
+                <p:panelGrid style="margin-left: 100px; "> 
+                    <p:row >  
+                        <p:column styleClass="ui-widget-header" ><h:outputText value="Ingreso como Invitado: " /></p:column>                        
+                    </p:row>  
+                    <p:row>  
+                        <p:column style="width: 300px;"><h:outputText value="Al ingresar como invitado se accede al análisis espacial de información a nivel de direcciones urbanas, permitiendo consultar la ubicación geografica de direcciones urbanas y la creación de mapas y gráficos estadisticos mediante cruce de variables." /></p:column>                        
+                    </p:row>  
+                    <p:row>
+                        <p:column colspan="2" style="text-align: center;" >                            
+                            <p:commandButton 
+                                value="INGRESAR" 												
+                                action="#{loginMB.checkGeocoderValidUser()}"                                              
+                                update="@form"/>                            
+                        </p:column>
+                    </p:row>  
+                </p:panelGrid>
+            </div>
+            <div style="
+             display: none;
+             position: absolute;
+             top: 10px;
+             right: 10px;"
+                 id="IdEndSession">
+                
+                <p:graphicImage value="img/timeout_sesion.png" />                
+            </div>
+            <div style="
+             display: none;
+             position: absolute;
+             top: 10px;
+             right: 10px;"
+                 id="IdCloseSession">
+                <p:graphicImage value="img/close_sesion.png" />   
+            </div>
+            <div style="
+             display: none;
+             position: absolute;
+             top: 10px;
+             right: 10px;"
+                 id="IdNoSession">
+                <p:graphicImage value="img/no_sesion.png" />                 
+            </div>
+            
+        </h:form>  
+    </h:body>
+</html>

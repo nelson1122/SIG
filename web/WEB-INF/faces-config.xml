@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+    <lifecycle>
+        <phase-listener>geocoder.controller.util.DefaultPhaseListener</phase-listener>
+    </lifecycle>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>addressSearch</from-outcome>
+            <to-view-id>addressSearch.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>fatalInjuries</from-outcome>
+            <to-view-id>fatalInjuries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>                           
+        <navigation-case>
+            <from-outcome>nonFatalInjuries</from-outcome>
+            <to-view-id>nonFatalInjuries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>geocoderHomePage</from-outcome>
+            <to-view-id>homePage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>geocoderIndexConfiguration</from-outcome>
+            <to-view-id>indexConfiguration.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>  
+    </navigation-rule>
+    
+</faces-config>

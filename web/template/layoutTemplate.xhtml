@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- OPENLAYERS -->
+        <script type="text/javascript" src="js/ol-v3.14.2/ol.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/ol-v3.14.2/ol.css"/>
+        <!-- OPENLAYERS LAYERSWITCHER -->
+        <script type="text/javascript" src="js/ol3-layerswitcher/ol3-layerswitcher.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/ol3-layerswitcher/ol3-layerswitcher.css"/>
+        <!-- HIGHCHARTS -->
+        <script type="text/javascript" src="js/highcharts-v4.2.1/highcharts.js"></script>
+        <script type="text/javascript" src="js/highcharts-v4.2.1/exporting.js"></script>
+        <!--CUSTOM CSS FILE -->
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+        <ui:insert name="script"></ui:insert>
+
+        <title><ui:insert name="indexTitle"></ui:insert></title>
+    </h:head>
+
+    <h:body>
+        <h:form id="formInjuries">
+
+            <ui:insert name="InactivityLayer">
+            </ui:insert>
+
+            <p:growl id="msg"  showDetail="true" sticky="true" autoUpdate="true" life="1000"/>
+
+            <h:graphicImage id="logo" name="./../img/logo2.png"/>
+
+            <p:toolbar style="margin-left: 110px; margin-top: -30px; margin-bottom: 2px;">
+                <p:toolbarGroup align="left">
+                    <p:commandButton 
+                        value="Busqueda de direcciones" 
+                        action="addressSearch" 
+                        ajax="false"/>
+                    <p:commandButton 
+                        value="Analisis de Lesiones de Causa Externa" 
+                        action="#{injuriesCountMB.loadNonFatalIndicator()}"
+                        ajax="false"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    Usuario: #{loginMB.userName} &nbsp;&nbsp;
+                    <p:commandButton 
+                        id="btnHome" 
+                        value="Inicio" 
+                        icon="ui-icon-home" 
+                        action="homePage" 
+                        ajax="false"/>
+                    <p:commandButton 
+                        id="btnLogout" 
+                        value="Cerrar sesión" 
+                        icon="ui-icon-circle-close" 
+                        actionListener="#{loginMB.logout}"
+                        ajax="false"/> 
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:layout style="height: 624px;" >
+
+                <p:layoutUnit position="center" >
+                    <ui:insert name="centerPanel">
+                    </ui:insert>
+
+                    <p:ajaxStatus 
+                        style=" position:fixed; 
+                        top: 5px; 
+                        right:35px; 
+                        width:17px;
+                        height:17px; 
+                        z-index: 21;"                        
+                        id="ajaxStatusPanel">  
+                        <f:facet name="start">  
+                            <h:graphicImage value="../img/ajaxloading.gif" />                      
+                        </f:facet>          
+                        <f:facet name="complete">  
+                            <h:outputText value="&nbsp;" />  
+                        </f:facet>  
+                    </p:ajaxStatus>
+
+                </p:layoutUnit>
+                <ui:insert name="leftPanel">
+                </ui:insert>
+            </p:layout>
+
+            <ui:insert name="dialogs">   
+            </ui:insert>
+        </h:form>
+    </h:body>
+
+</html>

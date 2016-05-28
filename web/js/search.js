@@ -34,7 +34,7 @@ $(function () {
         source: new ol.source.BingMaps({
             key: 'AnyGyd4GaAzToU0sDaA0NaXDD88yChcUh8ySoNc32_ddxkrxkl9K5SIATkA8EpMn',
             imagerySet: 'AerialWithLabels'}),
-        visible: false
+        visible: true
     });
     /*Creacion capa base de OSM*/
     var osmLayer = new ol.layer.Tile({

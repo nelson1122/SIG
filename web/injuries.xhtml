@@ -373,7 +373,7 @@
                                                 disabled="#{injuriesCountMB.btnRemoveVariableDisabled}"
                                                 actionListener="#{injuriesCountMB.btnLoadConfigurationClick}"
                                                 oncomplete="configurationsDialog.show();"
-                                                update="IdSelectOneListVariables  IdSelectOneListCrossVariables IdBtnRemove IdBtnAdd IdBtnOptions :formInjuries:IdForm2:IdConfigurationsList :formInjuries:msg"/>
+                                                update="IdSelectOneListVariables  IdSelectOneListCrossVariables IdBtnRemove IdBtnAdd IdBtnOptions :formInjuries:msg"/>
 
                                         </p:column>
                                         <p:column>
@@ -489,62 +489,6 @@
 
             <ui:define name="dialogs">
                 <h:form id="IdForm2">
-                    <p:dialog                     
-                        id="IdSaveConfigurationsDialog"  
-                        modal="true"
-                        header="Guardar configuración"
-                        resizable="false"                    
-                        widgetVar="saveConfigurationDialog">  
-                        <br/>                    
-                        Nombre para La configuración
-                        <br/>                    
-                        <br/>
-                        <h:inputText                         
-                            value="#{injuriesCountMB.newConfigurationName}" 
-                            size="70"/>
-                        <br/>
-                        <br/>
-                        <p:commandButton                                                            
-                            value="Guardar"
-                            style="margin:0;"
-                            oncomplete="saveConfigurationDialog.hide()"
-                            actionListener="#{injuriesCountMB.btnSaveConfigurationClick}"
-                            update="IdConfigurationsList :formInjuries:msg"/>
-                        <br/>
-                        <br/>
-                    </p:dialog>
-                    <p:dialog 
-                        id="IdOpenConfigurationsDialog"  
-                        modal="true"
-                        header="Cargar configuración"         
-                        resizable="false"                    
-                        widgetVar="openConfigurationDialog">  
-                        <br/>
-                        <h:selectManyListbox 
-                            id="IdConfigurationsList"
-                            value="#{injuriesCountMB.currentConfigurationSelected}"
-                            style="height:110px; width: 360px;"
-                            converterMessage="Fallo de comunicación, por favor intente nuevamente.">
-                            <f:selectItems value="#{injuriesCountMB.configurationsList}"/>
-                        </h:selectManyListbox>
-                        <br/>
-                        <br/>
-                        <p:commandButton                                                            
-                            value="Cargar"
-                            style="margin:0;"
-                            oncomplete="openConfigurationDialog.hide()"
-                            actionListener="#{injuriesCountMB.btnOpenConfigurationClick}"
-                            update="IdSelectManyListCategoryValues IdConfigurationsList :formInjuries:msg"/>
-                        <p:commandButton                                                            
-                            value="Eliminar"
-                            style="margin:0;"                        
-                            oncomplete="openConfigurationDialog.hide()"
-                            actionListener="#{injuriesCountMB.btnRemoveConfigurationClick}"
-                            update="IdSelectManyListCategoryValues IdConfigurationsList :formInjuries:msg"/>  
-                        <br/>
-                        <br/>
-
-                    </p:dialog>
                     <p:dialog 
                         id="IdConfigurationsDialog"  
                         modal="true"
@@ -615,21 +559,11 @@
                                         update="IdBtnRemoveCategory IdSelectManyListCategoryValues"/>  
                                     <p:commandButton                        
                                         id="IdBtnResetCategory"
-                                        rendered="false"
+                                        rendered="true"
                                         value="Reiniciar"
                                         style="margin:0;"                                                
                                         actionListener="#{injuriesCountMB.btnResetCategoryListClick}"                                                
                                         update="IdBtnRemoveCategory IdSelectManyListCategoryValues"/>  
-                                    <p:commandButton   
-                                        rendered="#{loginMB.userSystem}"
-                                        value="Guardar"
-                                        style="margin:0;"
-                                        onclick="saveConfigurationDialog.show();"/>  
-                                    <p:commandButton                                                            
-                                        value="Cargar/Eliminar"
-                                        rendered="#{loginMB.userSystem}"
-                                        style="margin:0;"                    
-                                        oncomplete="openConfigurationDialog.show()"/>  
                                     <br/>
                                     <br/>
                                 </p:column>

@@ -25,6 +25,19 @@
                     function pageActive1() {//muestra la pagina habilitada
                         document.getElementById('IdInactivityLayer').style.display = "none";
                     }
+
+                    var collapsed = false;
+
+                    function changeToogleValue() {
+                        collapsed = !collapsed;
+                    }
+
+                    function toggleLayout() {
+                        if (collapsed) {
+                            sigLayout.toggle('east');
+                        }
+                    }
+
                 </script>
                 <div class="InactivityLayer" id="IdInactivityLayer"> Procesando...</div>
             </ui:define>
@@ -55,7 +68,7 @@
                             onclick="optDlg.show()"/>
                         <p:tooltip for="mapConfigBtn" value="Configuracion de capas" style="font-size: 9pt; font-family: sans-serif;"/>
                     </p:toolbarGroup>
-                    
+
                     <p:toolbarGroup>
                         &nbsp;&nbsp;Zonas de interés:&nbsp;
                         <p:selectBooleanButton
@@ -182,15 +195,16 @@
                 <!-- LLAMADA A PROCEDIMIENTO REMOTO DESDE JS -->
                 <p:remoteCommand
                     name="remoteDataProcess" actionListener="#{injuriesCountMB.remoteLoadJSONProcess()}"
-                    update=":formInjuries:configurationsTab:chartPanel"
-                    oncomplete="loadChart();configurationsTab.select(1);"
+                    update=":formInjuries:configurationsTab"
+                    onstart="configurationsTab.select(1);"
+                    oncomplete="loadChart(); toggleLayout()"
                     />
                 <p:remoteCommand
                     name="loadPointInfo" actionListener="#{injuriesCountMB.remoteLoadPointInfoProcess()}"
                     update=":formInjuries:hiddenControls txtInjuryIdForInfo txtPopupInfo"
                     oncomplete="loadInfo()"
                     />
-                
+
                 <p:remoteCommand
                     name="updateElements"
                     update=":formInjuries:configurationsTab:category"
@@ -200,8 +214,7 @@
 
             <!-- PANEL IZQUIERDO -->
             <ui:define name="leftPanel">
-                <p:layoutUnit position="east" size="39%" collapsible="true" collapsed="true" header="&nbsp;">
-
+                <p:layoutUnit position="east" size="39%" collapsible="true" header="&nbsp;"  >
                     <!-- PESTANAS CONFIGURACION Y RESULTADOS-->
                     <p:tabView id="configurationsTab"  widgetVar="configurationsTab" onTabChange="updateElements" style="width: 506px;">
                         <!-- PESTAÑA DE CONFIGURACIONES -->
@@ -212,6 +225,13 @@
                                     <p:selectOneMenu id="category"  
                                                      value="#{injuriesCountMB.selectedCategoryForInjuries}" 
                                                      style="width: 210px;">
+                                        <f:selectItem itemLabel="LESIONES DE CAUSA EXTERNA FATALES"  itemDisabled="true" itemValue=""/>
+                                        <f:selectItem itemLabel="Casos por Lesion Fatal" itemValue="1"/>
+                                        <f:selectItem itemLabel="Muertes por homicidios" itemValue="12"/>
+                                        <f:selectItem itemLabel="Muertes por suicidios" itemValue="19"/>
+                                        <f:selectItem itemLabel="Muertes no intencionales" itemValue="5"/>
+                                        <f:selectItem itemLabel="Muertes por accidentes de transito" itemValue="26"/>
+                                        <f:selectItem itemLabel="LESIONES DE CAUSA EXTERNA NO FATALES" itemDisabled="true" itemValue=""/>
                                         <f:selectItem itemLabel="Casos por Lesión no fatal" itemValue="3"/>
                                         <f:selectItem itemLabel="Lesiones No Intencionales" itemValue="47"/>
                                         <f:selectItem itemLabel="Violencia AutoInflingida" itemValue="54"/>
@@ -237,7 +257,7 @@
                                 </h:panelGroup>
 
                             </p:fieldset>
-                            
+
                             <p:fieldset legend="Rango de fechas">
                                 <h:panelGroup layout="block" style="margin: 10px 0px 20px 10px;">
 
@@ -289,7 +309,7 @@
 
                                 </h:panelGroup>
                             </p:fieldset>
-                            
+
                             <p:fieldset legend="Variables a cruzar">
                                 <p:panelGrid style="margin: 15px 0px 20px 0px;">
                                     <p:row>

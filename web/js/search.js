@@ -9,6 +9,7 @@ var points, heatmap;
 var pointsOverlay, heatmapOverlay; //Grupos de capas para puntos / heatmap
 var vectorLayer, iconFeature, popup;
 var container, content, closer; // contenedores (divs) para el popup (mapa de puntos)
+var geoserverHost;
 
 $(function () {
     
@@ -16,6 +17,8 @@ $(function () {
     container = document.getElementById('popup');
     content = document.getElementById('popup-content');
     closer = document.getElementById('popup-closer');
+    
+    geoserverHost = 'http://' + location.host + '/geoserver/geocoder/wms';
 
     var bmapsRoads = new ol.layer.Tile({
         title: 'BingMaps Roads',
@@ -23,7 +26,7 @@ $(function () {
             key: 'AnyGyd4GaAzToU0sDaA0NaXDD88yChcUh8ySoNc32_ddxkrxkl9K5SIATkA8EpMn',
             imagerySet: 'Road'
         }),
-        visible: true
+        visible: false
     });
     /*Creacion capa base Bing Maps Aerial*/
     var bmapsAerial = new ol.layer.Tile({
@@ -39,6 +42,38 @@ $(function () {
         source: new ol.source.OSM(),
         visible: false
     });
+    
+    /*Creacion capa base Comunas*/
+    var communes = new ol.layer.Image({
+        title: 'Comunas',
+        source: new ol.source.ImageWMS({
+            ratio: 1,
+            url: geoserverHost,
+            params: {'FORMAT': 'image/png',
+                'VERSION': '1.1.1',
+                LAYERS: 'geocoder:communes',
+                STYLES: '',
+                env: 'opacity:0.4'
+            }
+        }),
+        visible: true
+    });
+
+    /*Creacion capa base Barrios*/
+    var neighborhoods = new ol.layer.Image({
+        title: 'Barrios',
+        source: new ol.source.ImageWMS({
+            ratio: 1,
+            url: geoserverHost,
+            params: {'FORMAT': 'image/png',
+                'VERSION': '1.1.1',
+                LAYERS: 'geocoder:neighborhoods',
+                STYLES: '',
+                env: 'opacity:0.4'
+            }
+        }),
+        visible: true
+    });
 
     /**
      * GRUPOS PARA LAYERSWITCHER
@@ -48,7 +83,12 @@ $(function () {
         title: 'Mapas Base',
         layers: [osmLayer, bmapsRoads, bmapsAerial]
     });
-
+    
+    var baseLayers = new ol.layer.Group({
+        title: 'Capas Base',
+        layers: [neighborhoods, communes]
+    });
+    
     /**
      * MAPA
      * @type ol.Map
@@ -75,7 +115,7 @@ $(function () {
             })
         ]),
         renderer: 'canvas', // Force the renderer to be used
-        layers: [baseMaps],
+        layers: [baseMaps, baseLayers],
         // Create a view centered on the specified location and zoom level
         view: new ol.View({
             center: [-8602509.5692, 134983.3435],

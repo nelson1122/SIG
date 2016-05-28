@@ -10,7 +10,7 @@ and open the template in the editor.
 
 body {
     background-color: #ffffff;
-    font-size: 10px;
+    font-size: 10.5px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #282828;
 }
@@ -37,10 +37,10 @@ a:link:hover, a:visited:hover  {
 }
 
 #formInjuries\:logo{
-    width: 100px;
-    height: 30px;
+    width: 134px;
+    height: 24px;
     display:block;
-    margin:-5px 0px -2px 0px;
+    margin:0px 0px 0px 0px;
 }
 
 #welcome {

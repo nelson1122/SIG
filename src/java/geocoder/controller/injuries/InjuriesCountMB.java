@@ -31,6 +31,9 @@ import geocoder.model.dao.entityclasses.IndicatorsConfigurations;
 import geocoder.model.dao.sessionbeans.IndicatorsAddressesFacade;
 import geocoder.model.dao.sessionbeans.IndicatorsConfigurationsFacade;
 import geocoder.model.dao.sessionbeans.IndicatorsFacade;
+import javax.annotation.PostConstruct;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -105,7 +108,7 @@ public class InjuriesCountMB {
     private boolean showEmpty = false;
     
     private boolean showInjuriesLayer = false; //mostrar mapa de puntos / calor
-    private int selectedCategoryForInjuries = 3;
+    private int selectedCategoryForInjuries = 1;
     private boolean continueProcess = true;
     
     private String mapType = "points";
@@ -137,6 +140,9 @@ public class InjuriesCountMB {
     private double neighborhoodsOpacityValue = 0.5;
     private double communesOpacityValue = 0.5;
     
+    private List<SelectItem> selectListCategories; 
+            
+    
     private Integer tuplesProcessed = 0;
     private StringBuilder sb;
     private CopyManager cpManager;
@@ -167,6 +173,29 @@ public class InjuriesCountMB {
         endDate.setDate(c.get(Calendar.DATE));
         endDate.setMonth(c.get(Calendar.MONTH));
         endDate.setYear(c.get(Calendar.YEAR) - 1900);
+        
+        
+    }
+    
+    
+    
+    @PostConstruct
+    public void loadCategories(){
+        SelectItemGroup fatalCategory = new SelectItemGroup("Fatales 1");
+        //SelectItem [] fatalCategories = new SelectItem[1];
+        //fatalCategories[0] = new SelectItem(3, "Casos por Lesion No Fatal");
+        fatalCategory.setSelectItems(new SelectItem[]{new SelectItem("3", "Lesiones No fatales"), new SelectItem("3", "Lesiones No fatales")});
+        
+        SelectItemGroup nonFatalCategory = new SelectItemGroup("No fatales 1");
+        //SelectItem[] nonFatalCategories = new SelectItem[1];
+        //nonFatalCategories[0] = new SelectItem(2, "EJEMPLO");
+        nonFatalCategory.setSelectItems(new SelectItem[]{new SelectItem("4", "Lesiones No fatales"), new SelectItem("3", "Lesiones No fatales")});
+        
+        selectListCategories = new ArrayList<SelectItem>();
+        
+        selectListCategories.add(fatalCategory);
+        selectListCategories.add(nonFatalCategory);
+    
     }
 
     /**
@@ -2416,7 +2445,8 @@ public class InjuriesCountMB {
         connectionJdbcMB.non_query(sql);
 
         //consulta espacial
-        sql = "SELECT \n"
+        sql = ""
+                + "SELECT \n"
                 + "	column_1, \n"
                 + "	column_2, \n"
                 + "	column_3, \n"
@@ -2436,7 +2466,6 @@ public class InjuriesCountMB {
                 + "	column_1, \n"
                 + "	column_2, \n"
                 + "	column_3 ";
-
         ResultSet rs = connectionJdbcMB.consult(sql);
         try {//actualizo el valor count de los registros currentIndicator.getIndicatorId() apartir de  currentIndicator.getIndicatorId()+100
             while (rs.next()) {
@@ -3166,6 +3195,14 @@ public class InjuriesCountMB {
         this.popupInfo = popupInfo;
     }
 
+    public List<SelectItem> getSelectListCategories() {
+        return selectListCategories;
+    }
+
+    public void setSelectListCategories(List<SelectItem> selectListCategories) {
+        this.selectListCategories = selectListCategories;
+    }
+    
     public void remoteLoadPointInfoProcess() {
 
         popupInfo = "Identificador de delito recibido: " + injuryIdForInfo;

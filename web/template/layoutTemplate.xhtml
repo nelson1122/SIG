@@ -35,7 +35,7 @@
 
             <h:graphicImage id="logo" name="./../img/logo2.png"/>
 
-            <p:toolbar style="margin-left: 110px; margin-top: -30px; margin-bottom: 2px;">
+            <p:toolbar style="margin-left: 140px; margin-top: -30px; margin-bottom: 2px;">
                 <p:toolbarGroup align="left">
                     <p:commandButton 
                         value="Busqueda de direcciones" 
@@ -63,7 +63,7 @@
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <p:layout style="height: 624px;" >
+            <p:layout style="height: 624px;"  onToggle="changeToogleValue()" widgetVar="sigLayout">
 
                 <p:layoutUnit position="center" >
                     <ui:insert name="centerPanel">

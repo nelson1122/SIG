@@ -335,7 +335,7 @@ $(function () {
 function loadDataLayer() {
 
     removeComponents();
-    drawingLayer.getSource().clear();
+    //drawingLayer.getSource().clear();
     map.removeLayer(heatmapOverlay);
     map.removeLayer(pointsOverlay);
 
@@ -364,7 +364,6 @@ function loadDataLayer() {
  * @param {ol.source.DataSource} dataSource
  * @returns {loadPoints}
  */
-
 function loadPoints(geoserverParams) {
 
     var pointsOpacity = $('#formInjuries\\:pointsOpacity').val();

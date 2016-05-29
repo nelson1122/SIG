@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sig.model.connection;
+package sig.model.jdbc;
 
 import java.io.Serializable;
 import java.sql.*;

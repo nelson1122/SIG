@@ -4,7 +4,7 @@
  */
 package sig.controller.application;
 
-import sig.model.connection.ConnectionJdbcMB;
+import sig.model.jdbc.ConnectionJdbcMB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;

@@ -10,7 +10,7 @@
         </resource-bundle>
     </application>
     <lifecycle>
-        <phase-listener>geocoder.controller.util.DefaultPhaseListener</phase-listener>
+        <phase-listener>sig.controller.application.DefaultPhaseListener</phase-listener>
     </lifecycle>
     
     <navigation-rule>

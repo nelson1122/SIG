@@ -5,6 +5,9 @@
 package sig.controller.geocoder;
 
 
+import sig.controller.util.Variable;
+import sig.controller.util.VariablesEnum;
+import sig.controller.util.JsfUtil;
 import java.io.IOException;
 import java.io.StringReader;
 import java.sql.ResultSet;
@@ -21,7 +24,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import sig.controller.application.LoginMB;
-import sig.model.connection.ConnectionJdbcMB;
+import sig.model.jdbc.ConnectionJdbcMB;
 import sig.model.pojo.Indicators;
 import sig.model.dao.IndicatorsAddressesFacade;
 import sig.model.dao.IndicatorsConfigurationsFacade;

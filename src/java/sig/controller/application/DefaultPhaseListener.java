@@ -11,8 +11,6 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import sig.controller.application.ApplicationControlMB;
-import sig.controller.application.LoginMB;
 
 /**
  * The DefaultPhaseListener class is called when request is made to the server,

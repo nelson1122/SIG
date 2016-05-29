@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sig.controller.geocoder;
+package sig.controller.util;
 
 import java.util.ArrayList;
 import java.util.Date;

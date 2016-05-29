@@ -5,6 +5,7 @@
  */
 package sig.controller.geocoder;
 
+import sig.controller.util.JsfUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import sig.model.connection.ConnectionJdbcMB;
+import sig.model.jdbc.ConnectionJdbcMB;
 /**
  *
  * @author nelson
